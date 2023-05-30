@@ -17,3 +17,8 @@ features = [
     "macro-diagnostics", # Enable better diagnostics for compile-time UUIDs
     "serde",             # Enabling serialization and deserialization for serde's UUIDs
 ]
+
+[dependencies.mongodb]
+version = "2.5.0"
+default-features = false
+features = ["async-std-runtime"]

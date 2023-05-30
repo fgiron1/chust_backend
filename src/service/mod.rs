@@ -1,3 +1,3 @@
-pub mod api;
-pub mod toy_service;
-pub mod model;
+pub mod handlers;
+pub mod models;
+pub mod routes;

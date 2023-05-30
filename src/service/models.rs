@@ -12,8 +12,11 @@ pub struct Room {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-
 pub struct User {
     id : Uuid,
     name : String,
 }
+
+#[derive(Debug)]
+pub struct ErrorInput;
+impl warp::reject::Reject for ErrorInput {}
