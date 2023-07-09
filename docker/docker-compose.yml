@@ -1,0 +1,56 @@
+version: '3.8'
+services:
+  primary:
+    image: mongo:latest
+    container_name: primary
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
+    ports:
+      - '27017:27017'
+    networks:
+      - mongo_replica_network
+    volumes:
+      - ~/chust/data1:/data/db
+      - ~/chust/init.d/:/docker-entrypoint-initdb.d 
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: /run/secrets/db_root_user
+      MONGO_INITDB_ROOT_PASSWORD: /run/secrets/db_root_password
+      MONGO_INITDB_DATABASE: init_db
+    secrets:
+      - db_root_password
+      - db_root_user
+
+  secondary1:
+    image: mongo:latest
+    container_name: secondary1
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
+    ports:
+    - '27018:27017'
+    networks:
+      - mongo_replica_network
+    volumes:
+      - ~/chust/data2:/data/db
+
+  secondary2:
+    image: mongo:latest
+    container_name: secondary2
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
+    ports:
+    - '27019:27017'
+    networks:
+      - mongo_replica_network
+    volumes:
+      - ~/chust/data3:/data/db
+
+networks:
+  mongo_replica_network:
+    driver: bridge
+
+secrets:
+  db_root_user:
+    file: db_root_user.txt
+  db_root_password:
+    file: db_root_password.txt
+
