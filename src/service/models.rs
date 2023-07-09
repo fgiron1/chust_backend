@@ -1,13 +1,14 @@
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-#[derive(Debug, Deserialize, Serialize)]
+
+#[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct Room {
 
-    id : Uuid,
+    id : Option<Uuid>,
     creator_id : Uuid,
-    password : String, // Internamente se maneja el hash.
-    salt : String,
+    password : Option<String>, // Internamente se maneja el hash.
+    salt : Option<String>,
 
 }
 
