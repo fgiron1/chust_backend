@@ -19,6 +19,5 @@ features = [
 ]
 
 [dependencies.mongodb]
-version = "2.5.0"
-default-features = false
-features = ["async-std-runtime"]
+version = "2.6.0"
+features = ["bson-uuid-1"]
