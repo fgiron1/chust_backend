@@ -9,7 +9,7 @@ pub fn set_endpoints() -> impl Filter<Extract = impl warp::Reply, Error = warp::
 
     let root = warp::path::end()
         .and(warp::get())
-        .map(|| "You're in /\nNice");
+        .map(|| "You're in \"/\"\nNice");
     let login = warp::path!("login")
         .and(warp::path::end())
         .and(warp::post())

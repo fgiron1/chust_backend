@@ -10,7 +10,7 @@ pub async fn save_room(
     room : models::Room
 ) -> Result<impl warp::Reply, warp::Rejection> {
     // Business logic. If not satisfied, rejected.
-    if valid_room(room) {
+    if valid_room(&room) {
         // Save to mongoDB
         return Ok(warp::reply::json(&room));
     } else {
@@ -20,7 +20,7 @@ pub async fn save_room(
     
 // SYNCHRONOUS VALIDATION AGAINST BUSINESS RULES
 // NOT MEANT FOR ANY DATABASE VALIDATION (WOULD BE ASYNC)
-fn valid_room(model : models::Room) -> bool {
+fn valid_room(model : &models::Room) -> bool {
     // Validation logic
     return true;
 }
